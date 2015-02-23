@@ -74,7 +74,8 @@ class RecordAudioViewController: UIViewController,AVAudioRecorderDelegate {
         Set the audio session category and mode in order to communicate to the system how you intend to use audio in your app
         */
         var session = AVAudioSession.sharedInstance()
-        session.setCategory(AVAudioSessionCategoryPlayAndRecord, error: nil)
+//        session.setCategory(AVAudioSessionCategoryPlayAndRecord, error: nil)
+        session.setCategory(AVAudioSessionCategoryPlayAndRecord, withOptions: AVAudioSessionCategoryOptions.DefaultToSpeaker, error: nil)
         //audioRecorder = AVAudioRecorder(URL: filePath, settings: nil, error: nil)
         audioRecorder = AVAudioRecorder(URL: filePath, settings: nil, error: nil)
         audioRecorder.delegate = self
