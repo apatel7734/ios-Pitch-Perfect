@@ -15,7 +15,7 @@ class RecordAudioViewController: UIViewController,AVAudioRecorderDelegate {
     @IBOutlet weak var recordingLabel: UILabel!
     
     @IBOutlet weak var stopButton: UIButton!
-
+    
     @IBOutlet weak var recordButton: UIButton!
     
     var audioRecorder: AVAudioRecorder!
@@ -32,8 +32,11 @@ class RecordAudioViewController: UIViewController,AVAudioRecorderDelegate {
         //hide stop button
         stopButton.hidden = true
         recordButton.enabled = true
+        recordingLabel.hidden = false
+        recordingLabel.text = "Tap to record"
+        
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -42,9 +45,9 @@ class RecordAudioViewController: UIViewController,AVAudioRecorderDelegate {
     
     //interface builder action means connected to some UI event
     @IBAction func didRecordButtonClicked(sender: UIButton) {
-        recordingLabel.hidden = false
         stopButton.hidden = false
         recordButton.enabled = false
+        recordingLabel.text = "Recording..."
         
         //start recording audio
         recordAudio()
@@ -74,7 +77,7 @@ class RecordAudioViewController: UIViewController,AVAudioRecorderDelegate {
         Set the audio session category and mode in order to communicate to the system how you intend to use audio in your app
         */
         var session = AVAudioSession.sharedInstance()
-//        session.setCategory(AVAudioSessionCategoryPlayAndRecord, error: nil)
+        // session.setCategory(AVAudioSessionCategoryPlayAndRecord, error: nil)
         session.setCategory(AVAudioSessionCategoryPlayAndRecord, withOptions: AVAudioSessionCategoryOptions.DefaultToSpeaker, error: nil)
         //audioRecorder = AVAudioRecorder(URL: filePath, settings: nil, error: nil)
         audioRecorder = AVAudioRecorder(URL: filePath, settings: nil, error: nil)
@@ -103,9 +106,8 @@ class RecordAudioViewController: UIViewController,AVAudioRecorderDelegate {
     
     func audioRecorderDidFinishRecording(recorder: AVAudioRecorder!, successfully flag: Bool) {
         if flag{
-            recordedAudio = RecordedAudio()
-            recordedAudio.filePathUrl = recorder.url
-            recordedAudio.title = recorder.url.lastPathComponent
+            var audioTitle = recorder.url.lastPathComponent
+            recordedAudio = RecordedAudio(pathUrl: recorder.url, title: audioTitle!)
             self.performSegueWithIdentifier("stopRecordingSegue", sender: recordedAudio)
         }else{
             println("Unsuccessful attempt of recording audio")
@@ -123,7 +125,7 @@ class RecordAudioViewController: UIViewController,AVAudioRecorderDelegate {
     }
     
     
-
-
+    
+    
 }
 

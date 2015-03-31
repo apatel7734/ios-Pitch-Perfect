@@ -24,7 +24,7 @@
                                     <action selector="didRecordButtonClicked:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="wix-ej-e9F"/>
                                 </connections>
                             </button>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="recording" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KfP-Hh-gZV">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="recording" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KfP-Hh-gZV" userLabel="recording label">
                                 <rect key="frame" x="179" y="426" width="57" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -52,7 +52,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
                         <outlet property="recordButton" destination="6NS-aa-xFL" id="ZlL-s2-DCJ"/>
-                        <outlet property="recordingLabel" destination="KfP-Hh-gZV" id="BQD-Bo-a3U"/>
+                        <outlet property="recordingLabel" destination="KfP-Hh-gZV" id="53J-Nv-XRT"/>
                         <outlet property="stopButton" destination="L7D-io-Yyv" id="7ox-Gk-5OA"/>
                         <segue destination="zd5-MB-WxA" kind="show" identifier="stopRecordingSegue" id="ykb-hS-50I"/>
                     </connections>
