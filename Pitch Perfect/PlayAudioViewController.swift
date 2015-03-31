@@ -24,29 +24,6 @@ class PlayAudioViewController: UIViewController,AVAudioPlayerDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        //keeping code here for testing
-        //get the file code structure
-        /*
-        var path = NSBundle.mainBundle().pathForResource("movie_quote", ofType: "mp3")
-        if (path != nil){
-            var urlPath = NSURL(fileURLWithPath: path!)
-            
-            audioPlayer = AVAudioPlayer(contentsOfURL: urlPath, error: nil)
-            audioPlayer.enableRate = true
-            
-            audioPlayerEcho = AVAudioPlayer(contentsOfURL: urlPath, error: nil)
-            audioPlayerEcho.enableRate = true
-            
-            audioFile = AVAudioFile(forReading: urlPath, error: nil)
-            
-        }else{
-            println("can't find path")
-        }
-        */
-        
-
-        
         if (recievedAudio.filePathUrl != nil){
         var urlPath = recievedAudio.filePathUrl
         
