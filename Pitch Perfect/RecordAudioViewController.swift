@@ -112,8 +112,10 @@ class RecordAudioViewController: UIViewController,AVAudioRecorderDelegate {
             println("Unsuccessful attempt of recording audio")
             recordButton.enabled = true
             stopButton.hidden = true
+            recordingLabel.text = "Try again!"
         }
     }
+    
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if(segue.identifier == "stopRecordingSegue"){

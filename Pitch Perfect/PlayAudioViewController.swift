@@ -25,19 +25,19 @@ class PlayAudioViewController: UIViewController,AVAudioPlayerDelegate{
         super.viewDidLoad()
         
         if (recievedAudio.filePathUrl != nil){
-        var urlPath = recievedAudio.filePathUrl
-        
-        audioPlayer = AVAudioPlayer(contentsOfURL: urlPath, error: nil)
-        audioPlayer.enableRate = true
-        
-        audioPlayerEcho = AVAudioPlayer(contentsOfURL: urlPath, error: nil)
-        audioPlayerEcho.enableRate = true
-        
-        audioFile = AVAudioFile(forReading: urlPath, error: nil)
+            var urlPath = recievedAudio.filePathUrl
+            
+            audioPlayer = AVAudioPlayer(contentsOfURL: urlPath, error: nil)
+            audioPlayer.enableRate = true
+            
+            audioPlayerEcho = AVAudioPlayer(contentsOfURL: urlPath, error: nil)
+            audioPlayerEcho.enableRate = true
+            
+            audioFile = AVAudioFile(forReading: urlPath, error: nil)
         }else{
-        println("can't find path")
+            println("can't find path")
         }
-
+        
         audioPlayer.delegate=self
         audioEngine = AVAudioEngine()
         
@@ -52,6 +52,7 @@ class PlayAudioViewController: UIViewController,AVAudioPlayerDelegate{
     
     @IBAction func didSlowButtonClicked(sender: UIButton) {
         self.stopAllPlayers()
+        audioPlayer.currentTime = 0.0
         audioPlayer.rate = 0.5
         audioPlayer.play()
         
@@ -60,6 +61,7 @@ class PlayAudioViewController: UIViewController,AVAudioPlayerDelegate{
     
     @IBAction func didFastButtonClicked(sender: UIButton) {
         self.stopAllPlayers()
+        audioPlayer.currentTime = 0.0
         audioPlayer.rate = 2.0
         audioPlayer.play()
     }
@@ -157,8 +159,6 @@ class PlayAudioViewController: UIViewController,AVAudioPlayerDelegate{
     
     func playWithEffect(effect: AVAudioUnit){
         stopAllPlayers()
-        audioEngine.stop()
-        audioEngine.reset()
         
         //initialize all audio tools
         audioPlayerNode = AVAudioPlayerNode()
@@ -180,6 +180,11 @@ class PlayAudioViewController: UIViewController,AVAudioPlayerDelegate{
         audioPlayer.stop()
         if(audioPlayerNode != nil){
             audioPlayerNode.stop()
+        }
+        
+        if(audioEngine != nil){
+            audioEngine.stop()
+            audioEngine.reset()
         }
     }
     
