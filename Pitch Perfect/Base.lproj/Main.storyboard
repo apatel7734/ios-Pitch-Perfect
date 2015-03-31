@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="mXU-Lp-nn2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="zd5-MB-WxA">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -99,6 +99,15 @@
                                     <action selector="didFastButtonClicked:" destination="zd5-MB-WxA" eventType="touchUpInside" id="A2V-Uh-cK0"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L4i-Pr-Jl9" userLabel="stop-play">
+                                <rect key="frame" x="159" y="590" width="96" height="96"/>
+                                <state key="normal" image="play">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="didStopButtonClicked:" destination="zd5-MB-WxA" eventType="touchUpInside" id="MLO-9x-lnd"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0XG-21-KTT" userLabel="chipmunk">
                                 <rect key="frame" x="16" y="349" width="100" height="100"/>
                                 <constraints>
@@ -125,8 +134,8 @@
                                     <action selector="playDarthVaderButtonClicked:" destination="zd5-MB-WxA" eventType="touchUpInside" id="0Zs-7a-qc4"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nt2-z7-tIW" userLabel="chipmunk">
-                                <rect key="frame" x="157" y="460" width="100" height="100"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nt2-z7-tIW" userLabel="echo">
+                                <rect key="frame" x="16" y="480" width="100" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="tLH-d9-JMt"/>
                                     <constraint firstAttribute="width" constant="100" id="wt3-D6-3Lh"/>
@@ -137,21 +146,27 @@
                                     <action selector="playAudioWithEcho:" destination="zd5-MB-WxA" eventType="touchUpInside" id="B59-JQ-Alf"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L4i-Pr-Jl9" userLabel="stop-play">
-                                <rect key="frame" x="159" y="590" width="96" height="96"/>
-                                <state key="normal" image="play">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bc5-PL-hgn" userLabel="echo">
+                                <rect key="frame" x="298" y="480" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="pqv-7V-XF7"/>
+                                    <constraint firstAttribute="height" constant="100" id="y3C-3I-z4H"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <state key="normal" title="Reverb"/>
                                 <connections>
-                                    <action selector="didStopButtonClicked:" destination="zd5-MB-WxA" eventType="touchUpInside" id="MLO-9x-lnd"/>
+                                    <action selector="playAudioWithReverb:" destination="zd5-MB-WxA" eventType="touchUpInside" id="1gS-68-Phs"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.33333333329999998" green="0.67450980390000004" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="Nt2-z7-tIW" firstAttribute="leading" secondItem="f8p-RZ-19q" secondAttribute="leadingMargin" id="03k-Z7-y5r"/>
+                            <constraint firstItem="bc5-PL-hgn" firstAttribute="trailing" secondItem="f8p-RZ-19q" secondAttribute="trailingMargin" id="3LM-bM-ogf"/>
                             <constraint firstItem="lJT-eW-qdF" firstAttribute="top" secondItem="QdD-dm-aih" secondAttribute="bottom" constant="85" id="3sN-FH-hqY"/>
+                            <constraint firstItem="bc5-PL-hgn" firstAttribute="top" secondItem="lJT-eW-qdF" secondAttribute="bottom" constant="31" id="CR4-cg-kxj"/>
                             <constraint firstAttribute="centerX" secondItem="Nt2-z7-tIW" secondAttribute="centerX" id="QTb-qo-ln2"/>
-                            <constraint firstItem="L4i-Pr-Jl9" firstAttribute="top" secondItem="Nt2-z7-tIW" secondAttribute="bottom" constant="30" id="QfQ-Uh-t0T"/>
+                            <constraint firstItem="L4i-Pr-Jl9" firstAttribute="top" secondItem="Nt2-z7-tIW" secondAttribute="bottom" constant="10" id="QfQ-Uh-t0T"/>
                             <constraint firstItem="2fO-ej-tBv" firstAttribute="top" secondItem="L4i-Pr-Jl9" secondAttribute="bottom" constant="50" id="RkH-l2-IdA"/>
                             <constraint firstItem="lJT-eW-qdF" firstAttribute="trailing" secondItem="f8p-RZ-19q" secondAttribute="trailingMargin" id="Vqd-3O-76h"/>
                             <constraint firstItem="0XG-21-KTT" firstAttribute="leading" secondItem="f8p-RZ-19q" secondAttribute="leadingMargin" id="W4y-vE-PDK"/>
@@ -159,9 +174,16 @@
                             <constraint firstItem="QdD-dm-aih" firstAttribute="top" secondItem="r1L-S9-4Au" secondAttribute="bottom" constant="100" id="aFk-bs-aQU"/>
                             <constraint firstItem="1Yk-DV-st4" firstAttribute="leading" secondItem="f8p-RZ-19q" secondAttribute="leadingMargin" id="qKU-TW-qkh"/>
                             <constraint firstItem="0XG-21-KTT" firstAttribute="top" secondItem="1Yk-DV-st4" secondAttribute="bottom" constant="85" id="r49-Cs-2kd"/>
+                            <constraint firstItem="Nt2-z7-tIW" firstAttribute="top" secondItem="0XG-21-KTT" secondAttribute="bottom" constant="31" id="rAS-AE-S3p"/>
                             <constraint firstItem="1Yk-DV-st4" firstAttribute="top" secondItem="r1L-S9-4Au" secondAttribute="bottom" constant="100" id="ueO-Ys-2hV"/>
                             <constraint firstItem="QdD-dm-aih" firstAttribute="trailing" secondItem="f8p-RZ-19q" secondAttribute="trailingMargin" id="w8M-sv-0M6"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="QTb-qo-ln2"/>
+                                <exclude reference="QfQ-Uh-t0T"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="playpauseButton" destination="L4i-Pr-Jl9" id="3qD-Gy-ACw"/>

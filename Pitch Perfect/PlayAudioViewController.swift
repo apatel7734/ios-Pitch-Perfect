@@ -24,29 +24,12 @@ class PlayAudioViewController: UIViewController,AVAudioPlayerDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        /*
+        
+        //keeping code here for testing
         //get the file code structure
         var path = NSBundle.mainBundle().pathForResource("movie_quote", ofType: "mp3")
         if (path != nil){
-        var urlPath = NSURL(fileURLWithPath: path!)
-        
-        audioPlayer = AVAudioPlayer(contentsOfURL: urlPath, error: nil)
-        audioPlayer.enableRate = true
-        
-        audioPlayerEcho = AVAudioPlayer(contentsOfURL: urlPath, error: nil)
-        audioPlayerEcho.enableRate = true
-        
-        audioFile = AVAudioFile(forReading: urlPath, error: nil)
-        
-        }else{
-        println("can't find path")
-        }
-        */
-        
-        
-        
-        if (recievedAudio.filePathUrl != nil){
-            var urlPath = recievedAudio.filePathUrl
+            var urlPath = NSURL(fileURLWithPath: path!)
             
             audioPlayer = AVAudioPlayer(contentsOfURL: urlPath, error: nil)
             audioPlayer.enableRate = true
@@ -55,10 +38,27 @@ class PlayAudioViewController: UIViewController,AVAudioPlayerDelegate{
             audioPlayerEcho.enableRate = true
             
             audioFile = AVAudioFile(forReading: urlPath, error: nil)
+            
         }else{
             println("can't find path")
         }
         
+        /*
+        
+        if (recievedAudio.filePathUrl != nil){
+        var urlPath = recievedAudio.filePathUrl
+        
+        audioPlayer = AVAudioPlayer(contentsOfURL: urlPath, error: nil)
+        audioPlayer.enableRate = true
+        
+        audioPlayerEcho = AVAudioPlayer(contentsOfURL: urlPath, error: nil)
+        audioPlayerEcho.enableRate = true
+        
+        audioFile = AVAudioFile(forReading: urlPath, error: nil)
+        }else{
+        println("can't find path")
+        }
+        */
         audioPlayer.delegate=self
         audioEngine = AVAudioEngine()
         
@@ -103,10 +103,6 @@ class PlayAudioViewController: UIViewController,AVAudioPlayerDelegate{
     }
     
     @IBAction func didStopButtonClicked(sender: UIButton) {
-        //        audioPlayer.stop()
-        //        audioPlayerNode.stop()
-        
-        
         /*
         works for audioPlayer.
         */
@@ -147,33 +143,18 @@ class PlayAudioViewController: UIViewController,AVAudioPlayerDelegate{
     
     
     func playAudioWithPitch(pitch: Float){
-        audioPlayer.stop()
-        audioEngine.stop()
-        audioEngine.reset()
-        
-        //initialize all audio tools
-        audioPlayerNode = AVAudioPlayerNode()
-        audioEngine.attachNode(audioPlayerNode)
         
         var pitchEffect: AVAudioUnitTimePitch = AVAudioUnitTimePitch()
         pitchEffect.pitch = pitch
-        audioEngine.attachNode(pitchEffect)
         
-        
-        audioEngine.connect(audioPlayerNode, to: pitchEffect, format: nil)
-        audioEngine.connect(pitchEffect, to: audioEngine.outputNode, format: nil)
-        
-        audioPlayerNode.scheduleFile(audioFile, atTime: nil, completionHandler: nil)
-        
-        audioEngine.startAndReturnError(nil)
-        audioPlayerNode.play()
-        
+        playWithEffect(pitchEffect)
     }
     
     //playing echo
     @IBAction func playAudioWithEcho(sender: UIButton){
         
-        audioPlayer.stop()
+        stopAllPlayers()
+        
         audioPlayer.currentTime = 0;
         audioPlayer.play()
         
@@ -186,6 +167,35 @@ class PlayAudioViewController: UIViewController,AVAudioPlayerDelegate{
     }
     
     
+    @IBAction func playAudioWithReverb(sender: UIButton){
+        
+        var reverbEffect: AVAudioUnitReverb = AVAudioUnitReverb()
+        reverbEffect.wetDryMix = 80
+        
+        playWithEffect(reverbEffect)
+    }
+    
+    
+    func playWithEffect(effect: AVAudioUnit){
+        stopAllPlayers()
+        audioEngine.stop()
+        audioEngine.reset()
+        
+        //initialize all audio tools
+        audioPlayerNode = AVAudioPlayerNode()
+        audioEngine.attachNode(audioPlayerNode)
+        
+        audioEngine.attachNode(effect)
+        
+        audioEngine.connect(audioPlayerNode, to: effect, format: nil)
+        audioEngine.connect(effect, to: audioEngine.outputNode, format: nil)
+        audioPlayerNode.scheduleFile(audioFile, atTime: nil, completionHandler: nil)
+        audioEngine.startAndReturnError(nil)
+        audioPlayerNode.play()
+        
+    }
+    
+    
     func stopAllPlayers(){
         audioPlayerEcho.stop()
         audioPlayer.stop()
@@ -193,18 +203,6 @@ class PlayAudioViewController: UIViewController,AVAudioPlayerDelegate{
             audioPlayerNode.stop()
         }
     }
-    
-    
-    
-    /*
-    // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    // Get the new view controller using segue.destinationViewController.
-    // Pass the selected object to the new view controller.
-    }
-    */
     
 }
 
