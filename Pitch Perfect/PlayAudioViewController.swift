@@ -84,27 +84,14 @@ class PlayAudioViewController: UIViewController,AVAudioPlayerDelegate{
     }
     
     @IBAction func didStopButtonClicked(sender: UIButton) {
-        /*
-        works for audioPlayer.
-        */
-        if let playingAudio = audioPlayer?.playing{
-            if(playingAudio){
-                audioPlayer.pause()
-                var playImage = UIImage(named: "play")
-                sender.setImage(playImage, forState: UIControlState.Normal)
-            }else{
-                audioPlayer.play()
-                var pauseImage  = UIImage(named: "pause")
-                sender.setImage(pauseImage, forState: UIControlState.Normal)
-                
-            }
-        }
-        
-        /*
-        not sure whats the delegate method for finish playing audioPlayerNode.
-        */
-        if(self.audioPlayerNode != nil){
-            println("audioPlayerNode \(audioPlayerNode.playing)")
+        if(audioPlayer.playing){
+            stopAllPlayers()
+            var playImage = UIImage(named: "play")
+            sender.setImage(playImage, forState: UIControlState.Normal)
+        }else{
+            audioPlayer.play()
+            var stopImage = UIImage(named: "stop")
+            sender.setImage(stopImage, forState: UIControlState.Normal)
         }
     }
     
