@@ -19,8 +19,6 @@ class PlayAudioViewController: UIViewController,AVAudioPlayerDelegate{
     var audioPlayerNode: AVAudioPlayerNode!
     var audioFile: AVAudioFile!
     
-    @IBOutlet weak var playpauseButton: UIButton!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -71,7 +69,6 @@ class PlayAudioViewController: UIViewController,AVAudioPlayerDelegate{
     func audioPlayerDidFinishPlaying(player: AVAudioPlayer!, successfully flag: Bool) {
         println("didFinishPlaying")
         player.stop()
-        playpauseButton.setImage(UIImage(named: "play"), forState: UIControlState.Normal)
     }
     
     
@@ -84,15 +81,7 @@ class PlayAudioViewController: UIViewController,AVAudioPlayerDelegate{
     }
     
     @IBAction func didStopButtonClicked(sender: UIButton) {
-        if(audioPlayer.playing){
-            stopAllPlayers()
-            var playImage = UIImage(named: "play")
-            sender.setImage(playImage, forState: UIControlState.Normal)
-        }else{
-            audioPlayer.play()
-            var stopImage = UIImage(named: "stop")
-            sender.setImage(stopImage, forState: UIControlState.Normal)
-        }
+        stopAllPlayers()
     }
     
     
